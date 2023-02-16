@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ua">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/flat-ui.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <h2>Іпотечний калькулятор</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Розрахунок щомісячного платежу</h4>
+          <form role="form" id="form1">
+            <div class="form-group">
+              <label for="sum1">Вартість квартири</label>
+              <input type="text" class="form-control" id="sum1" placeholder="Введіть вартість квартири в гривнях" value="1000000">
+            </div>
+            <div class="form-group">
+              <label for="period1">Період</label>
+              <input type="text" class="form-control" id="period1" placeholder="Введіть термін кредиту у роках" value="10">
+            </div>
+            <div class="form-group">
+              <label for="rate1">Ставка</label>
+              <input type="text" class="form-control" id="rate1" placeholder="Введіть ставку у відсотках" value="8">
+            </div>
+            <button type="submit" class="btn btn-success" id="calc1">Розрахувати</button>
+          </form>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Розрахунок терміну</h4>
+          <form role="form" id="form2">
+            <div class="form-group">
+              <label for="sum2">Вартість квартири</label>
+              <input type="text" class="form-control" id="sum2" placeholder="Введіть вартість квартири в гривнях" value="">
+            </div>
+            <div class="form-group">
+              <label for="payment2">Щомісячний платіж</label>
+              <input type="text" class="form-control" id="payment2" placeholder="Введіть суму щомісячного платежу у гривнях" value="">
+            </div>
+            <div class="form-group">
+              <label for="rate2">Ставка</label>
+              <input type="text" class="form-control" id="rate2" placeholder="Введіть ставку у відсотках" value="">
+            </div>
+            <button type="submit" class="btn btn-success" id="calc2">Розрахувати</button>
+          </form>
+        </div>
+      </div>
+      <br>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+
+        var form1 = document.querySelector('#form1'),
+            sum1 = document.querySelector('#sum1'),
+            period1 = document.querySelector('#period1'),
+            rate1 = document.querySelector('#rate1'),
+            calc1 = document.querySelector('#calc1');
+
+        var form2 = document.querySelector('#form2'),
+            sum2 = document.querySelector('#sum2'),
+            payment2 = document.querySelector('#payment2'),
+            rate2 = document.querySelector('#rate2'),
+            calc2 = document.querySelector('#calc2');
+
+        form1.addEventListener('submit', function(e) {
+            var result,
+                elem = document.createElement('div');
+            e.preventDefault();
+            elem.innerHTML = 'Щомісячний платіж, у гривнях: ' + calculator.getPayment(sum1.value, period1.value, rate1.value);
+            form1.appendChild(elem);
+            form1.removeChild(calc1);
+        }, false);
+
+        form2.addEventListener('submit', function(e) {
+            var result,
+                elem = document.createElement('div');
+            e.preventDefault();
+            console.log(sum2.value, payment2.value, rate2.value);
+            elem.innerHTML = 'Термін, у місяцях: ' + calculator.getPeriod(sum2.value, payment2.value, rate2.value);
+            form2.appendChild(elem);
+            form2.removeChild(calc2);
+        }, false);
+
+    </script>
+  </body>
+</html>
